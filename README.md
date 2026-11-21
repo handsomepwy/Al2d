@@ -108,6 +108,7 @@ Rigging requests (send a layered PSD), questions, or to see the newest results:
 
 - Email: handsomepwy@gmail.com
 - [GitHub issues](https://github.com/handsomepwy/Al2d/issues)
+- Discussion thread (Chinese) on linux.do: https://linux.do/t/topic/3174431
 
 ## Licence and credits
 
@@ -131,5 +132,7 @@ Al2d 直接写出 Cubism Editor 的工程文件（`.cmo3`），包括网格、�
 > 这个视频是 2026-11-14 用早期版本的代码做的。之后配方加入了歪头、眉毛、嘴型、眯眼笑，眨眼也参照专业模型重做了，所以视频并不代表现在的效果。最新的成果是在 Live2D 官方示例角色 Haru 上做的，受示例素材许可限制不能在这里公开，欢迎[联系我](#contact)查看。
 
 **接绑定委托**（请提供分层 PSD）、提问或想看最新效果：邮箱 handsomepwy@gmail.com，或在 GitHub 提 issue。
+
+讨论帖（linux.do）：https://linux.do/t/topic/3174431
 
 安装和使用步骤见上方英文部分。
