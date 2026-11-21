@@ -1,0 +1,12 @@
+# machine-specific settings
+al2d.toml
+# build output
+out/
+# client work and private data: never commit
+clients/
+data/
+# python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/

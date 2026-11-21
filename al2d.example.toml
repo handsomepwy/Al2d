@@ -1,0 +1,18 @@
+# Copy to al2d.toml (not committed) and fill in.  Forward slashes work on Windows too.
+
+# Umamo checkout with patches/umamo.patch applied: converts .cmo3 to .moc3.
+umamo_dir = "C:/tools/umamo"
+
+# JDK for Umamo (optional; the environment's JAVA_HOME is used when left out).
+java_home = "C:/java/jdk-23"
+
+# Live2D Cubism Core library, used to check and render built models.
+# From the Cubism SDK for Native, or the copy VTube Studio ships:
+#   <VTube Studio>/VTube Studio_Data/Plugins/x86_64/Live2DCubismCore.dll
+core_dll = "C:/path/to/Live2DCubismCore.dll"
+
+# VTube Studio's model folder, only for --install.
+vts_models = "C:/Program Files (x86)/Steam/steamapps/common/VTube Studio/VTube Studio_Data/StreamingAssets/Live2DModels"
+
+# Live2D's sample "Haru" (receptionist) files, only for characters/haru.  Not redistributable.
+# haru_dir = "C:/live2d/haru_greeter"

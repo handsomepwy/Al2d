@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "al2d"
+version = "0.1.0"
+description = "Build Live2D models (.cmo3 / .moc3) from layered artwork in Python"
+readme = "README.md"
+license = { text = "GPL-3.0-or-later" }
+requires-python = ">=3.11"
+dependencies = ["numpy", "pillow", "opencv-python", "scipy", "psd-tools"]
+
+[tool.setuptools]
+packages = ["al2d"]
+
+[tool.setuptools.package-data]
+al2d = ["cmo3_imports.txt"]
