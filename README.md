@@ -1,6 +1,6 @@
 # Al2d
 
-**Build Live2D models in Python, from a layered PSD to a model VTube Studio can load, without clicking through Cubism Editor.**
+**An AI agent rigs Live2D models in code: from a layered PSD to a model VTube Studio can load, without clicking through Cubism Editor.**
 
 [中文说明](#中文说明)
 
@@ -31,16 +31,21 @@ VTube Studio: **https://www.bilibili.com/video/BV1suWr6DEYd/**
 
 ## How it works
 
-```
-Human-drawn PSD ───────────────────────────────┐
-  or one picture ─► See-through (AI layer split) ┤
-                                                ▼
-1. Art prep    al2d/artprep.py + characters/<name>/prep.py     → clean PSD
-2. Rig         al2d/rigkit.py recipes + characters/<name>/build.py
-               → al2d/cmo3writer.py (+ automesh, caff)          → .cmo3
-3. Convert     Umamo (patched) → .moc3;  al2d/physics.py → physics3.json
-4. Check       al2d/l2dcore.py renders through Cubism Core      → check pictures and GIFs
-5. Install     --install copies the model into VTube Studio
+```mermaid
+flowchart TD
+    PSD["Human-drawn layered PSD"] --> PREP
+    PIC["One flat picture"] --> ST["See-through<br/>AI layer split (optional)"]
+    ST --> PREP
+    AGENT{{"AI agent<br/>writes this character's prep.py and build.py"}}
+    AGENT -.-> PREP
+    AGENT -.-> RIG
+    PREP["1. Art prep<br/>al2d/artprep.py + characters/NAME/prep.py"] --> RIG
+    RIG["2. Rig<br/>al2d/rigkit.py recipes + characters/NAME/build.py"] --> CMO3[".cmo3 project<br/>al2d/cmo3writer.py"]
+    CMO3 --> EDITOR["Cubism Editor<br/>optional fine-tuning by hand"]
+    CMO3 --> CONVERT["3. Convert<br/>Umamo: .moc3, al2d/physics.py: physics3.json"]
+    CONVERT --> CHECK["4. Check<br/>al2d/l2dcore.py renders every pose through Cubism Core"]
+    CHECK -.->|"agent reads the check pictures and adjusts"| AGENT
+    CHECK --> VTS["5. VTube Studio<br/>--install"]
 ```
 
 Details: [docs/workflow.md](docs/workflow.md). File format notes: [docs/cmo3-format.md](docs/cmo3-format.md).
@@ -69,6 +74,9 @@ Requirements: Python 3.11+, a JDK (21 or newer) for Umamo, and the Cubism Core l
    Studio ships in `VTube Studio_Data/Plugins/x86_64/`. It is Live2D's proprietary library and is
    not included here.
 4. Copy `al2d.example.toml` to `al2d.toml` and fill in the paths.
+5. Optional, only for starting from one flat picture instead of a layered PSD:
+   [See-through](https://github.com/shitagaki-lab/see-through), installed separately. It needs a
+   GPU with about 8 GB or more; the command is in [docs/workflow.md](docs/workflow.md).
 
 Build the examples:
 
@@ -110,7 +118,9 @@ Live2D and Cubism are trademarks of Live2D Inc. This project is not affiliated w
 
 ## 中文说明
 
-**用 Python 直接生成 Live2D 模型：从分层 PSD 到能在 VTube Studio 里用的模型，全程不需要在 Cubism Editor 里手动操作。**
+**由 AI 智能体用代码绑定 Live2D 模型：从分层 PSD 到能在 VTube Studio 里用的模型，全程不需要在 Cubism Editor 里手动操作。**
+
+输入可以是画师绘制的分层 PSD，也可以是一张图（先用 [See-through](https://github.com/shitagaki-lab/see-through) 自动拆层）。
 
 Al2d 直接写出 Cubism Editor 的工程文件（`.cmo3`），包括网格、弯曲/旋转变形器、参数、关键帧、剪贴蒙版和纹理图集，再转换成运行时文件（`.moc3`、`model3.json`、`physics3.json`），并通过 Live2D 的 Cubism Core 渲染检查结果。绑定由一组"配方"完成（眨眼、嘴、眼珠、转头和歪头、眉毛、嘴型、头发摆动、物理），它们根据画面本身测量，而不是手填坐标。每个角色只需要一个简短的脚本，说明哪些图层是一组、动作幅度多大。生成的 `.cmo3` 是标准的 Cubism Editor 工程，可以直接在 Editor 里打开继续手动微调。
 
