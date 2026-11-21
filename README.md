@@ -10,6 +10,7 @@ parameters, keyforms, clipping masks and a texture atlas. It converts them to ru
 Cubism Core. Rigging is done by *recipes* (blink, mouth, pupils, head turn and tilt, brows, mouth
 form, hair sway, physics) that measure the artwork instead of relying on typed-in coordinates.
 A short per-character script says which layers belong together and how much things move.
+The `.cmo3` is a normal Cubism Editor project, so the result can still be fine-tuned by hand.
 
 The code was written by an AI coding agent under my direction, and each new character is rigged
 the same way: the agent writes that character's script, builds, looks at the check pictures and
@@ -88,8 +89,10 @@ groups.
 
 Not yet: opacity or draw order that change with a parameter (needed for expressions that swap
 drawings), a parts tree, several texture pages, glue, blend shapes, expression and motion files,
-body and arm rigs. Generated `.cmo3` files load in Umamo and convert correctly; opening them in
-Cubism Editor has not been tested yet.
+body and arm rigs.
+
+Generated `.cmo3` files open in Cubism Editor 5.3 with no warnings: textures, deformer tree and
+parameters all work there, so a rig built by Al2d can still be fine-tuned by hand.
 
 ## Contact
 
@@ -109,7 +112,7 @@ Live2D and Cubism are trademarks of Live2D Inc. This project is not affiliated w
 
 **用 Python 直接生成 Live2D 模型：从分层 PSD 到能在 VTube Studio 里用的模型，全程不需要在 Cubism Editor 里手动操作。**
 
-Al2d 直接写出 Cubism Editor 的工程文件（`.cmo3`），包括网格、弯曲/旋转变形器、参数、关键帧、剪贴蒙版和纹理图集，再转换成运行时文件（`.moc3`、`model3.json`、`physics3.json`），并通过 Live2D 的 Cubism Core 渲染检查结果。绑定由一组"配方"完成（眨眼、嘴、眼珠、转头和歪头、眉毛、嘴型、头发摆动、物理），它们根据画面本身测量，而不是手填坐标。每个角色只需要一个简短的脚本，说明哪些图层是一组、动作幅度多大。
+Al2d 直接写出 Cubism Editor 的工程文件（`.cmo3`），包括网格、弯曲/旋转变形器、参数、关键帧、剪贴蒙版和纹理图集，再转换成运行时文件（`.moc3`、`model3.json`、`physics3.json`），并通过 Live2D 的 Cubism Core 渲染检查结果。绑定由一组"配方"完成（眨眼、嘴、眼珠、转头和歪头、眉毛、嘴型、头发摆动、物理），它们根据画面本身测量，而不是手填坐标。每个角色只需要一个简短的脚本，说明哪些图层是一组、动作幅度多大。生成的 `.cmo3` 是标准的 Cubism Editor 工程，可以直接在 Editor 里打开继续手动微调。
 
 代码由 AI 编程助手在我的指导下编写；每个新角色也用同样方式绑定：AI 为这个角色写脚本、构建、看检查图、再调整。
 
